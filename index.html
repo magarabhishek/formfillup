@@ -5,6 +5,204 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title> Menu </title>
 		<link rel="stylesheet" href="menu-styles.css">
+		<style>
+			.cart-section {
+				position: fixed;
+				right: 0;
+				top: 0;
+				width: 350px;
+				height: 100vh;
+				background: white;
+				border-left: 2px solid var(--primary-color);
+				padding: 20px;
+				overflow-y: auto;
+				box-shadow: -4px 0 12px rgba(0,0,0,0.1);
+				z-index: 1000;
+			}
+
+			.cart-toggle {
+				position: fixed;
+				right: 20px;
+				bottom: 20px;
+				background: var(--primary-color);
+				color: white;
+				border: none;
+				padding: 15px 20px;
+				border-radius: 50px;
+				cursor: pointer;
+				font-weight: bold;
+				box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+				z-index: 999;
+			}
+
+			.cart-toggle:hover {
+				background: var(--primary-dark);
+			}
+
+			.close-cart {
+				background: none;
+				border: none;
+				font-size: 24px;
+				cursor: pointer;
+				float: right;
+			}
+
+			.add-to-cart-btn {
+				background: var(--primary-color);
+				color: white;
+				border: none;
+				padding: 8px 12px;
+				border-radius: 6px;
+				cursor: pointer;
+				font-weight: bold;
+				font-size: 12px;
+				margin-top: 8px;
+				transition: 0.3s;
+			}
+
+			.add-to-cart-btn:hover {
+				background: var(--primary-dark);
+			}
+
+			.cart-item {
+				display: flex;
+				justify-content: space-between;
+				padding: 10px;
+				border-bottom: 1px solid var(--border-light);
+				align-items: center;
+			}
+
+			.cart-item-name {
+				flex: 1;
+			}
+
+			.cart-item-price {
+				font-weight: bold;
+				color: var(--primary-dark);
+			}
+
+			.remove-btn {
+				background: #ff4444;
+				color: white;
+				border: none;
+				padding: 4px 8px;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 11px;
+			}
+
+			.cart-total {
+				font-size: 18px;
+				font-weight: bold;
+				margin-top: 20px;
+				padding-top: 20px;
+				border-top: 2px solid var(--primary-color);
+				text-align: center;
+			}
+
+			.bill-section {
+				margin-top: 20px;
+				padding: 15px;
+				background: var(--primary-light);
+				border-radius: 8px;
+				display: none;
+			}
+
+			.bill-section.show {
+				display: block;
+			}
+
+			.bill-item {
+				display: flex;
+				justify-content: space-between;
+				margin: 8px 0;
+				font-size: 13px;
+			}
+
+			.bill-total {
+				font-weight: bold;
+				font-size: 16px;
+				color: var(--primary-dark);
+				border-top: 1px solid var(--primary-color);
+				padding-top: 10px;
+				margin-top: 10px;
+			}
+
+			.payment-methods-checkout {
+				margin-top: 20px;
+				padding-top: 20px;
+				border-top: 2px solid var(--primary-color);
+			}
+
+			.payment-button {
+				width: 100%;
+				padding: 10px;
+				margin: 8px 0;
+				border: 2px solid var(--border-light);
+				background: white;
+				border-radius: 6px;
+				cursor: pointer;
+				font-weight: bold;
+				font-size: 13px;
+				transition: all 0.3s;
+			}
+
+			.payment-button:hover {
+				border-color: var(--primary-color);
+				background: var(--primary-light);
+			}
+
+			.payment-button.selected {
+				background: var(--primary-color);
+				color: white;
+				border-color: var(--primary-color);
+			}
+
+			.pay-now-btn {
+				width: 100%;
+				padding: 12px;
+				background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+				color: white;
+				border: none;
+				border-radius: 6px;
+				font-weight: bold;
+				cursor: pointer;
+				margin-top: 15px;
+				font-size: 14px;
+				transition: 0.3s;
+			}
+
+			.pay-now-btn:hover:not(:disabled) {
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+			}
+
+			.pay-now-btn:disabled {
+				opacity: 0.5;
+				cursor: not-allowed;
+			}
+
+			.success-message {
+				background: #d4edda;
+				color: #155724;
+				padding: 15px;
+				border-radius: 6px;
+				margin-top: 15px;
+				display: none;
+				text-align: center;
+			}
+
+			.success-message.show {
+				display: block;
+			}
+
+			@media (max-width: 768px) {
+				.cart-section {
+					width: 100%;
+					right: 0;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<main class="card menu-card" role="main">
@@ -42,6 +240,7 @@
 							<h3>Truffle Mushroom Toast</h3>
 							<p>Grilled sourdough topped with creamy ricotta, wild mushrooms, and black truffle oil.</p>
 							<div class="details"><span class="price">$12</span><span class="tag">Vegetarian</span></div>
+							<button class="add-to-cart-btn" onclick="addToCart('Truffle Mushroom Toast', 12)">Add to Cart</button>
 						</div>
 					</article>
 					<article class="menu-item">
@@ -50,6 +249,7 @@
 							<h3>Spiced Calamari</h3>
 							<p>Crispy calamari rings with lemon aioli, smoked paprika, and fresh herbs.</p>
 							<div class="details"><span class="price">$14</span><span class="tag">Seafood</span></div>
+							<button class="add-to-cart-btn" onclick="addToCart('Spiced Calamari', 14)">Add to Cart</button>
 						</div>
 					</article>
 					<article class="menu-item">
@@ -58,6 +258,7 @@
 							<h3>Garden Salad Bowl</h3>
 							<p>Mixed greens, heirloom tomatoes, cucumbers, and goat cheese with citrus vinaigrette.</p>
 							<div class="details"><span class="price">$10</span><span class="tag">Gluten-Free</span></div>
+							<button class="add-to-cart-btn" onclick="addToCart('Garden Salad Bowl', 10)">Add to Cart</button>
 						</div>
 					</article>
 				</div>
@@ -72,6 +273,7 @@
 							<h3>Herb Roasted Chicken</h3>
 							<p>Half chicken roasted with rosemary, garlic, and lemon served with rosemary potatoes.</p>
 							<div class="details"><span class="price">$22</span><span class="tag">House Favorite</span></div>
+							<button class="add-to-cart-btn" onclick="addToCart('Herb Roasted Chicken', 22)">Add to Cart</button>
 						</div>
 					</article>
 					<article class="menu-item">
@@ -80,6 +282,7 @@
 							<h3>Seared Salmon</h3>
 							<p>Pan-seared salmon with honey-mustard glaze, wilted spinach, and wild rice pilaf.</p>
 							<div class="details"><span class="price">$24</span><span class="tag">Omega-3</span></div>
+							<button class="add-to-cart-btn" onclick="addToCart('Seared Salmon', 24)">Add to Cart</button>
 						</div>
 					</article>
 					<article class="menu-item">
@@ -88,6 +291,7 @@
 							<h3>Ravioli Primavera</h3>
 							<p>House-made ricotta ravioli tossed with zucchini, cherry tomatoes, and basil cream sauce.</p>
 							<div class="details"><span class="price">$20</span><span class="tag">Vegetarian</span></div>
+							<button class="add-to-cart-btn" onclick="addToCart('Ravioli Primavera', 20)">Add to Cart</button>
 						</div>
 					</article>
 				</div>
@@ -102,6 +306,7 @@
 							<h3>Salted Caramel Tart</h3>
 							<p>Buttery pastry filled with caramel custard and topped with smoked sea salt.</p>
 							<div class="details"><span class="price">$9</span><span class="tag">Sweet</span></div>
+							<button class="add-to-cart-btn" onclick="addToCart('Salted Caramel Tart', 9)">Add to Cart</button>
 						</div>
 					</article>
 					<article class="menu-item">
@@ -110,6 +315,7 @@
 							<h3>Chocolate Fondant</h3>
 							<p>Warm chocolate cake with molten center, served with vanilla ice cream.</p>
 							<div class="details"><span class="price">$11</span><span class="tag">Decadent</span></div>
+							<button class="add-to-cart-btn" onclick="addToCart('Chocolate Fondant', 11)">Add to Cart</button>
 						</div>
 					</article>
 					<article class="menu-item">
@@ -118,6 +324,7 @@
 							<h3>Mango Panna Cotta</h3>
 							<p>Silky panna cotta topped with fresh mango coulis and mint.</p>
 							<div class="details"><span class="price">$8</span><span class="tag">Light</span></div>
+							<button class="add-to-cart-btn" onclick="addToCart('Mango Panna Cotta', 8)">Add to Cart</button>
 						</div>
 					</article>
 				</div>
@@ -132,6 +339,7 @@
 							<h3>Classic Old Fashioned</h3>
 							<p>Bourbon, bitters, brown sugar, and orange zest served over ice.</p>
 							<div class="details"><span class="price">$13</span><span class="tag">Cocktail</span></div>
+							<button class="add-to-cart-btn" onclick="addToCart('Classic Old Fashioned', 13)">Add to Cart</button>
 						</div>
 					</article>
 					<article class="menu-item">
@@ -140,6 +348,7 @@
 							<h3>Lavender Lemonade</h3>
 							<p>Sparkling lemonade infused with lavender and fresh lemon slices.</p>
 							<div class="details"><span class="price">$6</span><span class="tag">Non-Alcoholic</span></div>
+							<button class="add-to-cart-btn" onclick="addToCart('Lavender Lemonade', 6)">Add to Cart</button>
 						</div>
 					</article>
 					<article class="menu-item">
@@ -148,40 +357,211 @@
 							<h3>Espresso Martini</h3>
 							<p>Vodka, espresso, coffee liqueur, and vanilla syrup shaken to perfection.</p>
 							<div class="details"><span class="price">$14</span><span class="tag">After Dinner</span></div>
+							<button class="add-to-cart-btn" onclick="addToCart('Espresso Martini', 14)">Add to Cart</button>
 						</div>
 					</article>
 				</div>
 			</section>
 
-			<section class="payment-section">
-				<h2>Payment Methods</h2>
-				<div class="payment-methods">
-					<div class="payment-item">
-						<div class="payment-badge visa">Visa</div>
-						<p>Credit/Debit Card</p>
-					</div>
-					<div class="payment-item">
-						<div class="payment-badge mastercard">Mastercard</div>
-						<p>Credit/Debit Card</p>
-					</div>
-					<div class="payment-item">
-						<div class="payment-badge paypal">PayPal</div>
-						<p>Digital Wallet</p>
-					</div>
-					<div class="payment-item">
-						<div class="payment-badge apple">Apple Pay</div>
-						<p>Mobile Payment</p>
-					</div>
-					<div class="payment-item">
-						<div class="payment-badge google">Google Pay</div>
-						<p>Mobile Payment</p>
-					</div>
-					<div class="payment-item">
-						<div class="payment-badge cash">Cash</div>
-						<p>On Delivery</p>
-					</div>
-				</div>
-			</section>
 		</main>
+
+		<!-- Shopping Cart Sidebar -->
+		<div class="cart-section" id="cartSection">
+			<button class="close-cart" onclick="toggleCart()">✕</button>
+			<h2>Your Order</h2>
+			<div id="cartItems" style="min-height: 200px;"></div>
+			
+			<div class="bill-section" id="billSection">
+				<h3 style="margin-top: 0;">Order Summary</h3>
+				<div id="billItems"></div>
+				<div class="bill-total">
+					Total: <span id="totalAmount">$0</span>
+				</div>
+			</div>
+
+			<div id="cartEmpty" style="text-align: center; color: #999; padding: 20px;">
+				Your cart is empty
+			</div>
+
+			<div class="payment-methods-checkout" id="paymentSection" style="display: none;">
+				<h3 style="margin-top: 0;">Select Payment Method</h3>
+				<button class="payment-button" onclick="selectPayment('Visa')">💳 Visa</button>
+				<button class="payment-button" onclick="selectPayment('Mastercard')">💳 Mastercard</button>
+				<button class="payment-button" onclick="selectPayment('PayPal')">🅿️ PayPal</button>
+				<button class="payment-button" onclick="selectPayment('Apple Pay')">🍎 Apple Pay</button>
+				<button class="payment-button" onclick="selectPayment('Google Pay')">🔵 Google Pay</button>
+				<button class="payment-button" onclick="selectPayment('Cash')">💵 Cash on Delivery</button>
+				<button class="pay-now-btn" id="payNowBtn" onclick="processPayment()" disabled>Pay Now</button>
+			</div>
+
+			<div class="success-message" id="successMessage">
+				✓ Payment Successful!<br>
+				Thank you for your order.
+			</div>
+		</div>
+
+		<button class="cart-toggle" onclick="toggleCart()">🛒 Cart</button>
+
+		<script>
+			let cart = [];
+			let selectedPayment = null;
+
+			function addToCart(itemName, price) {
+				cart.push({ name: itemName, price: price });
+				updateCart();
+				showNotification(itemName + ' added to cart!');
+			}
+
+			function removeFromCart(index) {
+				cart.splice(index, 1);
+				updateCart();
+			}
+
+			function updateCart() {
+				const cartItemsDiv = document.getElementById('cartItems');
+				const billItemsDiv = document.getElementById('billItems');
+				const cartEmptyDiv = document.getElementById('cartEmpty');
+				const paymentSection = document.getElementById('paymentSection');
+				const billSection = document.getElementById('billSection');
+				const totalAmountSpan = document.getElementById('totalAmount');
+				const successMessage = document.getElementById('successMessage');
+
+				// Reset success message
+				successMessage.classList.remove('show');
+
+				if (cart.length === 0) {
+					cartItemsDiv.innerHTML = '';
+					cartEmptyDiv.style.display = 'block';
+					paymentSection.style.display = 'none';
+					billSection.classList.remove('show');
+					selectedPayment = null;
+					return;
+				}
+
+				cartEmptyDiv.style.display = 'none';
+				paymentSection.style.display = 'block';
+				billSection.classList.add('show');
+
+				// Display cart items
+				cartItemsDiv.innerHTML = cart.map((item, index) => `
+					<div class="cart-item">
+						<div class="cart-item-name">${item.name}</div>
+						<div class="cart-item-price">$${item.price}</div>
+						<button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+					</div>
+				`).join('');
+
+				// Display bill items
+				billItemsDiv.innerHTML = cart.map(item => `
+					<div class="bill-item">
+						<span>${item.name}</span>
+						<span>$${item.price}</span>
+					</div>
+				`).join('');
+
+				// Calculate and display total
+				const total = cart.reduce((sum, item) => sum + item.price, 0);
+				totalAmountSpan.textContent = '$' + total.toFixed(2);
+
+				// Update pay button state
+				const payNowBtn = document.getElementById('payNowBtn');
+				payNowBtn.disabled = !selectedPayment;
+			}
+
+			function selectPayment(method) {
+				selectedPayment = method;
+				// Update button styles
+				document.querySelectorAll('.payment-button').forEach(btn => {
+					btn.classList.remove('selected');
+				});
+				event.target.classList.add('selected');
+
+				// Enable pay button
+				document.getElementById('payNowBtn').disabled = false;
+			}
+
+			function processPayment() {
+				if (cart.length === 0 || !selectedPayment) {
+					alert('Please select payment method and add items to cart');
+					return;
+				}
+
+				const total = cart.reduce((sum, item) => sum + item.price, 0);
+				const orderId = 'ORD' + Date.now();
+
+				// Show success message
+				const successMessage = document.getElementById('successMessage');
+				successMessage.innerHTML = `
+					✓ Payment Successful!<br>
+					<strong>Order ID:</strong> ${orderId}<br>
+					<strong>Method:</strong> ${selectedPayment}<br>
+					<strong>Total:</strong> $${total.toFixed(2)}<br>
+					<small>Thank you for your order!</small>
+				`;
+				successMessage.classList.add('show');
+
+				// Log order details
+				console.log('Order Placed:', {
+					orderId: orderId,
+					items: cart,
+					total: total,
+					paymentMethod: selectedPayment,
+					timestamp: new Date().toLocaleString()
+				});
+
+				// Clear cart after 3 seconds
+				setTimeout(() => {
+					cart = [];
+					selectedPayment = null;
+					updateCart();
+					alert('Order confirmed! Thank you for ordering from Vivid Bistro.');
+				}, 3000);
+			}
+
+			function toggleCart() {
+				document.getElementById('cartSection').style.right = 
+					document.getElementById('cartSection').style.right === '0px' ? '-350px' : '0px';
+			}
+
+			function showNotification(message) {
+				const notification = document.createElement('div');
+				notification.textContent = message;
+				notification.style.cssText = `
+					position: fixed;
+					top: 20px;
+					right: 20px;
+					background: #28a745;
+					color: white;
+					padding: 12px 20px;
+					border-radius: 6px;
+					z-index: 2000;
+					animation: slideIn 0.3s ease;
+				`;
+				document.body.appendChild(notification);
+				setTimeout(() => notification.remove(), 2000);
+			}
+
+			// Animation for notification
+			const style = document.createElement('style');
+			style.textContent = `
+				@keyframes slideIn {
+					from {
+						transform: translateX(400px);
+						opacity: 0;
+					}
+					to {
+						transform: translateX(0);
+						opacity: 1;
+					}
+				}
+			`;
+			document.head.appendChild(style);
+
+			// Initialize cart on page load
+			window.addEventListener('load', () => {
+				document.getElementById('cartSection').style.right = '-350px';
+				document.getElementById('cartSection').style.transition = 'right 0.3s ease';
+			});
+		</script>
 	</body>
 </html>
