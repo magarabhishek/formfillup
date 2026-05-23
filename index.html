@@ -2,10 +2,40 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<title> Menu </title>
 		<link rel="stylesheet" href="menu-styles.css">
 		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				overflow-x: hidden;
+			}
+
+			body.cart-open {
+				overflow: hidden;
+			}
+
+			.cart-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0, 0, 0, 0.5);
+				display: none;
+				z-index: 999;
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			.cart-overlay.show {
+				display: block;
+				opacity: 1;
+			}
+
 			.cart-section {
 				position: fixed;
 				right: 0;
@@ -18,6 +48,12 @@
 				overflow-y: auto;
 				box-shadow: -4px 0 12px rgba(0,0,0,0.1);
 				z-index: 1000;
+				transform: translateX(100%);
+				transition: transform 0.3s ease;
+			}
+
+			.cart-section.show {
+				transform: translateX(0);
 			}
 
 			.cart-toggle {
@@ -32,19 +68,23 @@
 				cursor: pointer;
 				font-weight: bold;
 				box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-				z-index: 999;
+				z-index: 998;
+				font-size: 16px;
+				transition: all 0.3s ease;
 			}
 
-			.cart-toggle:hover {
-				background: var(--primary-dark);
+			.cart-toggle:active {
+				transform: scale(0.95);
 			}
 
 			.close-cart {
 				background: none;
 				border: none;
-				font-size: 24px;
+				font-size: 28px;
 				cursor: pointer;
-				float: right;
+				padding: 0;
+				margin-bottom: 15px;
+				color: var(--primary-dark);
 			}
 
 			.add-to-cart-btn {
@@ -61,31 +101,32 @@
 				width: 100%;
 			}
 
+			.add-to-cart-btn:active {
+				transform: scale(0.98);
+			}
+
 			.add-to-cart-btn:hover {
 				background: var(--primary-dark);
 			}
 
 			.cart-item {
-				display: flex;
-				justify-content: space-between;
-				padding: 10px;
-				border-bottom: 1px solid var(--border-light);
-				align-items: center;
-				flex-wrap: wrap;
+				display: grid;
+				grid-template-columns: 1fr auto;
 				gap: 8px;
+				padding: 10px 0;
+				border-bottom: 1px solid var(--border-light);
+				align-items: start;
 			}
 
 			.cart-item-name {
-				flex: 1;
-				min-width: 100px;
 				font-size: 13px;
+				word-break: break-word;
 			}
 
 			.cart-item-price {
 				font-weight: bold;
 				color: var(--primary-dark);
-				min-width: 50px;
-				text-align: right;
+				white-space: nowrap;
 			}
 
 			.remove-btn {
@@ -96,7 +137,7 @@
 				border-radius: 4px;
 				cursor: pointer;
 				font-size: 11px;
-				flex: 0 0 100%;
+				grid-column: 1 / -1;
 				width: 100%;
 			}
 
@@ -158,6 +199,10 @@
 				transition: all 0.3s;
 			}
 
+			.payment-button:active {
+				transform: scale(0.98);
+			}
+
 			.payment-button:hover {
 				border-color: var(--primary-color);
 				background: var(--primary-light);
@@ -183,8 +228,11 @@
 				transition: 0.3s;
 			}
 
+			.pay-now-btn:active:not(:disabled) {
+				transform: scale(0.98);
+			}
+
 			.pay-now-btn:hover:not(:disabled) {
-				transform: translateY(-2px);
 				box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
 			}
 
@@ -202,6 +250,7 @@
 				display: none;
 				text-align: center;
 				font-size: 12px;
+				line-height: 1.5;
 			}
 
 			.success-message.show {
@@ -220,13 +269,19 @@
 				}
 			}
 
-			/* Mobile Responsive */
+			/* Mobile Responsive - 768px and below */
 			@media (max-width: 768px) {
 				.cart-section {
 					width: 100%;
 					right: 0;
 					padding: 15px;
 					height: 100vh;
+					border-left: none;
+					border-top: 2px solid var(--primary-color);
+				}
+
+				.close-cart {
+					font-size: 24px;
 				}
 
 				.cart-toggle {
@@ -237,11 +292,10 @@
 				}
 
 				.cart-item {
-					font-size: 12px;
+					padding: 8px 0;
 				}
 
 				.cart-item-name {
-					min-width: 80px;
 					font-size: 12px;
 				}
 
@@ -280,35 +334,38 @@
 				}
 			}
 
-			/* Small Mobile Responsive */
+			/* Small Mobile Responsive - 480px and below */
 			@media (max-width: 480px) {
 				.cart-section {
 					padding: 12px;
+					padding-top: 15px;
 				}
 
 				.cart-section h2 {
 					font-size: 18px;
 					margin: 0 0 15px 0;
+					word-break: break-word;
 				}
 
 				.cart-item {
-					padding: 8px;
-					gap: 6px;
+					padding: 8px 0;
+					gap: 5px;
 				}
 
 				.cart-item-name {
 					font-size: 11px;
-					min-width: 70px;
+					word-break: break-word;
 				}
 
 				.cart-item-price {
 					font-size: 11px;
-					min-width: 40px;
+					white-space: nowrap;
 				}
 
 				.remove-btn {
 					font-size: 9px;
 					padding: 3px 4px;
+					margin-top: 4px;
 				}
 
 				.bill-section {
@@ -368,6 +425,44 @@
 
 				.close-cart {
 					font-size: 20px;
+					margin-bottom: 10px;
+				}
+			}
+
+			/* Extra Small Mobile - 360px and below */
+			@media (max-width: 360px) {
+				.cart-section {
+					padding: 10px;
+					padding-top: 12px;
+				}
+
+				.cart-section h2 {
+					font-size: 16px;
+					margin: 0 0 12px 0;
+				}
+
+				.cart-item-name {
+					font-size: 10px;
+				}
+
+				.cart-item-price {
+					font-size: 10px;
+				}
+
+				.remove-btn {
+					font-size: 8px;
+					padding: 2px 4px;
+				}
+
+				.payment-button {
+					padding: 6px;
+					font-size: 10px;
+					margin: 4px 0;
+				}
+
+				.pay-now-btn {
+					padding: 8px;
+					font-size: 10px;
 				}
 			}
 		</style>
@@ -533,6 +628,9 @@
 
 		</main>
 
+		<!-- Cart Overlay -->
+		<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
 		<!-- Shopping Cart Sidebar -->
 		<div class="cart-section" id="cartSection">
 			<button class="close-cart" onclick="toggleCart()">✕</button>
@@ -687,8 +785,19 @@
 			}
 
 			function toggleCart() {
-				document.getElementById('cartSection').style.right = 
-					document.getElementById('cartSection').style.right === '0px' ? '-350px' : '0px';
+				const cartSection = document.getElementById('cartSection');
+				const cartOverlay = document.getElementById('cartOverlay');
+				const body = document.body;
+				
+				if (cartSection.classList.contains('show')) {
+					cartSection.classList.remove('show');
+					cartOverlay.classList.remove('show');
+					body.classList.remove('cart-open');
+				} else {
+					cartSection.classList.add('show');
+					cartOverlay.classList.add('show');
+					body.classList.add('cart-open');
+				}
 			}
 
 			function showNotification(message) {
@@ -725,10 +834,16 @@
 			`;
 			document.head.appendChild(style);
 
-			// Initialize cart on page load
+			// Initialize on page load
 			window.addEventListener('load', () => {
-				document.getElementById('cartSection').style.right = '-350px';
-				document.getElementById('cartSection').style.transition = 'right 0.3s ease';
+				updateCart();
+			});
+
+			// Close cart when pressing Escape key
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && document.getElementById('cartSection').classList.contains('show')) {
+					toggleCart();
+				}
 			});
 		</script>
 	</body>

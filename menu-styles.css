@@ -14,12 +14,15 @@
 /* Page Background */
 body {
 	background: linear-gradient(180deg, #faf8f3 0%, #f5f0e8 100%);
+	margin: 0;
+	padding: 0;
 }
 
 /* Menu Card Styling */
 .menu-card {
 	max-width: 960px;
 	padding: 32px;
+	margin: 0 auto;
 }
 
 /* Header Section */
@@ -293,17 +296,27 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
 	.menu-card {
-		padding: 20px;
+		padding: 15px;
 		padding-bottom: 80px;
+		margin: 0;
+		max-width: 100%;
+	}
+
+	body {
+		background: linear-gradient(180deg, #faf8f3 0%, #f5f0e8 100%);
 	}
 
 	.header {
 		flex-direction: column;
 		align-items: flex-start;
+		gap: 15px;
+		padding-bottom: 15px;
+		margin-bottom: 15px;
 	}
 
 	.header .meta {
 		text-align: left;
+		font-size: 12px;
 	}
 
 	.header h1 {
@@ -312,6 +325,7 @@ body {
 
 	.menu-grid {
 		grid-template-columns: 1fr;
+		gap: 15px;
 	}
 
 	.payment-methods {
@@ -335,64 +349,6 @@ body {
 		font-size: 11px;
 		padding: 6px 10px;
 	}
-}
-
-@media (max-width: 480px) {
-	.menu-card {
-		padding: 15px;
-		padding-bottom: 80px;
-	}
-
-	.header {
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 15px;
-		padding-bottom: 15px;
-		margin-bottom: 15px;
-	}
-
-	.header h1 {
-		font-size: 20px;
-	}
-
-	.header .meta {
-		text-align: left;
-		font-size: 12px;
-		padding: 10px;
-		width: 100%;
-	}
-
-	.eyebrow {
-		font-size: 11px;
-		padding: 6px 12px;
-	}
-
-	.menu-nav {
-		flex-direction: column;
-		gap: 8px;
-		margin: 15px 0 20px;
-	}
-
-	.menu-nav a {
-		width: 100%;
-		text-align: center;
-		padding: 10px 12px;
-		font-size: 12px;
-	}
-
-	.menu-grid {
-		grid-template-columns: 1fr;
-		gap: 15px;
-	}
-
-	.menu-section {
-		margin-top: 25px;
-	}
-
-	.menu-section h2 {
-		font-size: 18px;
-		margin-bottom: 15px;
-	}
 
 	.menu-item img {
 		height: 150px;
@@ -402,78 +358,68 @@ body {
 		padding: 12px 15px;
 	}
 
-	.menu-item h3 {
-		font-size: 15px;
-		margin-bottom: 6px;
-	}
-
 	.menu-item p {
 		font-size: 12px;
-		line-height: 1.4;
-		margin-bottom: 10px;
-	}
-
-	.menu-item .price {
-		font-size: 14px;
-	}
-
-	.menu-item .tag {
-		font-size: 10px;
-		padding: 3px 8px;
-	}
-
-	.add-to-cart-btn {
-		font-size: 10px;
-		padding: 6px 10px;
-		margin-top: 6px;
-	}
-
-	.payment-methods {
-		grid-template-columns: repeat(2, 1fr);
-		gap: 12px;
-	}
-
-	.payment-item {
-		padding: 12px;
-		gap: 8px;
-	}
-
-	.payment-badge {
-		padding: 10px 12px;
-		font-size: 12px;
-	}
-
-	.payment-item p {
-		font-size: 11px;
-	}
-
-	.lead {
-		font-size: 13px !important;
-		line-height: 1.4;
 	}
 }
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
 	.menu-card {
-		padding: 10px;
+		padding: 12px;
 		padding-bottom: 70px;
+		margin: 0;
+		max-width: 100%;
+	}
+
+	.header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+		padding-bottom: 12px;
+		margin-bottom: 12px;
 	}
 
 	.header h1 {
-		font-size: 18px;
+		font-size: 20px;
 	}
 
 	.header .meta {
+		text-align: left;
 		font-size: 11px;
+		padding: 8px;
+		width: 100%;
+	}
+
+	.eyebrow {
+		font-size: 10px;
+		padding: 5px 10px;
+	}
+
+	.menu-nav {
+		flex-direction: column;
+		gap: 6px;
+		margin: 12px 0 15px;
 	}
 
 	.menu-nav a {
+		width: 100%;
+		text-align: center;
 		padding: 8px 10px;
 		font-size: 11px;
 	}
 
+	.menu-grid {
+		grid-template-columns: 1fr;
+		gap: 12px;
+	}
+
+	.menu-section {
+		margin-top: 20px;
+	}
+
 	.menu-section h2 {
 		font-size: 16px;
+		margin-bottom: 12px;
 	}
 
 	.menu-item {
@@ -489,14 +435,116 @@ body {
 	}
 
 	.menu-item h3 {
-		font-size: 13px;
+		font-size: 14px;
+		margin-bottom: 5px;
 	}
 
 	.menu-item p {
 		font-size: 11px;
+		line-height: 1.3;
+		margin-bottom: 8px;
+	}
+
+	.menu-item .price {
+		font-size: 13px;
+	}
+
+	.menu-item .tag {
+		font-size: 9px;
+		padding: 2px 6px;
+	}
+
+	.menu-item .details {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 6px;
+	}
+
+	.add-to-cart-btn {
+		font-size: 10px;
+		padding: 6px 10px;
+		margin-top: 6px;
+	}
+
+	.payment-methods {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
+
+	.payment-item {
+		padding: 10px;
+		gap: 6px;
+	}
+
+	.payment-badge {
+		padding: 8px 10px;
+		font-size: 11px;
+	}
+
+	.payment-item p {
+		font-size: 10px;
+	}
+
+	.lead {
+		font-size: 12px !important;
+		line-height: 1.4;
+	}
+}
+
+@media (max-width: 360px) {
+	.menu-card {
+		padding: 10px;
+		padding-bottom: 65px;
+		max-width: 100%;
+	}
+
+	.header h1 {
+		font-size: 18px;
+	}
+
+	.header .meta {
+		font-size: 10px;
+		padding: 6px;
+	}
+
+	.menu-nav a {
+		padding: 7px 8px;
+		font-size: 10px;
+	}
+
+	.menu-section h2 {
+		font-size: 15px;
+		margin-bottom: 10px;
+	}
+
+	.menu-item img {
+		height: 100px;
+	}
+
+	.menu-item-content {
+		padding: 8px 10px;
+	}
+
+	.menu-item h3 {
+		font-size: 12px;
+	}
+
+	.menu-item p {
+		font-size: 10px;
 	}
 
 	.add-to-cart-btn {
 		font-size: 9px;
+		padding: 5px 8px;
+	}
+
+	.payment-methods {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 8px;
+	}
+
+	.payment-badge {
+		padding: 6px 8px;
+		font-size: 10px;
 	}
 }
