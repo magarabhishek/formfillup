@@ -3,99 +3,185 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>eSewa Registration — Demo</title>
-		<link rel="stylesheet" href="styles.css">
+		<title> Menu </title>
+		<link rel="stylesheet" href="menu-styles.css">
 	</head>
 	<body>
-		<main class="card" role="main">
-			<div class="card-logo">eSewa</div>
-			<h1>eSewa Registration (Demo)</h1>
-			<p class="lead">Create an account to practice form handling. This is a client-side demo only.</p>
+		<main class="card menu-card" role="main">
+			<div class="header">
+				<div>
+					<span class="eyebrow">Chef's Menu</span>
+					<h1>Vivid Bistro</h1>
+				</div>
+				<div class="meta">
+					<strong>Open now</strong><br>
+					Mon — Sun · 11:00 AM — 10:00 PM<br>
+					<br>
+					<strong>📍 Location</strong><br>
+					123 Culinary Street<br>
+					Manhattan, New York<br>
+					United States
+				</div>
+			</div>
 
-			<div id="error" style="display:none" class="error" role="alert"></div>
+			<p class="lead">Browse a curated restaurant menu with starters, mains, desserts, and drinks crafted for a fresh dining experience.</p>
 
-			<form id="regForm" novalidate>
-				<label for="fullname">Full name</label>
-				<input id="fullname" name="fullname" type="text" placeholder="Your full name" required />
+			<nav class="menu-nav" aria-label="Menu categories">
+				<a href="#starters">Starters</a>
+				<a href="#mains">Mains</a>
+				<a href="#desserts">Desserts</a>
+				<a href="#drinks">Drinks</a>
+			</nav>
 
-				<label for="email">Email</label>
-				<input id="email" name="email" type="email" placeholder="you@example.com" required />
+			<section id="starters" class="menu-section">
+				<h2>Starters</h2>
+				<div class="menu-grid">
+					<article class="menu-item">
+						<img src="images/truffle-mushroom-toast.jpg" alt="Truffle Mushroom Toast">
+						<div class="menu-item-content">
+							<h3>Truffle Mushroom Toast</h3>
+							<p>Grilled sourdough topped with creamy ricotta, wild mushrooms, and black truffle oil.</p>
+							<div class="details"><span class="price">$12</span><span class="tag">Vegetarian</span></div>
+						</div>
+					</article>
+					<article class="menu-item">
+						<img src="images/spiced-calamari.jpg" alt="Spiced Calamari">
+						<div class="menu-item-content">
+							<h3>Spiced Calamari</h3>
+							<p>Crispy calamari rings with lemon aioli, smoked paprika, and fresh herbs.</p>
+							<div class="details"><span class="price">$14</span><span class="tag">Seafood</span></div>
+						</div>
+					</article>
+					<article class="menu-item">
+						<img src="images/garden-salad.jpg" alt="Garden Salad Bowl">
+						<div class="menu-item-content">
+							<h3>Garden Salad Bowl</h3>
+							<p>Mixed greens, heirloom tomatoes, cucumbers, and goat cheese with citrus vinaigrette.</p>
+							<div class="details"><span class="price">$10</span><span class="tag">Gluten-Free</span></div>
+						</div>
+					</article>
+				</div>
+			</section>
 
-				<div class="row">
-					<div>
-						<label for="mobile">Mobile number</label>
-						<input id="mobile" name="mobile" type="text" placeholder="98XXXXXXXX" required />
+			<section id="mains" class="menu-section">
+				<h2>Mains</h2>
+				<div class="menu-grid">
+					<article class="menu-item">
+						<img src="images/roasted-chicken.jpg" alt="Herb Roasted Chicken">
+						<div class="menu-item-content">
+							<h3>Herb Roasted Chicken</h3>
+							<p>Half chicken roasted with rosemary, garlic, and lemon served with rosemary potatoes.</p>
+							<div class="details"><span class="price">$22</span><span class="tag">House Favorite</span></div>
+						</div>
+					</article>
+					<article class="menu-item">
+						<img src="images/seared-salmon.jpg" alt="Seared Salmon">
+						<div class="menu-item-content">
+							<h3>Seared Salmon</h3>
+							<p>Pan-seared salmon with honey-mustard glaze, wilted spinach, and wild rice pilaf.</p>
+							<div class="details"><span class="price">$24</span><span class="tag">Omega-3</span></div>
+						</div>
+					</article>
+					<article class="menu-item">
+						<img src="images/ravioli-primavera.jpg" alt="Ravioli Primavera">
+						<div class="menu-item-content">
+							<h3>Ravioli Primavera</h3>
+							<p>House-made ricotta ravioli tossed with zucchini, cherry tomatoes, and basil cream sauce.</p>
+							<div class="details"><span class="price">$20</span><span class="tag">Vegetarian</span></div>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<section id="desserts" class="menu-section">
+				<h2>Desserts</h2>
+				<div class="menu-grid">
+					<article class="menu-item">
+						<img src="images/salted-caramel-tart.jpg" alt="Salted Caramel Tart">
+						<div class="menu-item-content">
+							<h3>Salted Caramel Tart</h3>
+							<p>Buttery pastry filled with caramel custard and topped with smoked sea salt.</p>
+							<div class="details"><span class="price">$9</span><span class="tag">Sweet</span></div>
+						</div>
+					</article>
+					<article class="menu-item">
+						<img src="images/chocolate-fondant.jpg" alt="Chocolate Fondant">
+						<div class="menu-item-content">
+							<h3>Chocolate Fondant</h3>
+							<p>Warm chocolate cake with molten center, served with vanilla ice cream.</p>
+							<div class="details"><span class="price">$11</span><span class="tag">Decadent</span></div>
+						</div>
+					</article>
+					<article class="menu-item">
+						<img src="images/mango-panna-cotta.jpg" alt="Mango Panna Cotta">
+						<div class="menu-item-content">
+							<h3>Mango Panna Cotta</h3>
+							<p>Silky panna cotta topped with fresh mango coulis and mint.</p>
+							<div class="details"><span class="price">$8</span><span class="tag">Light</span></div>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<section id="drinks" class="menu-section">
+				<h2>Drinks</h2>
+				<div class="menu-grid">
+					<article class="menu-item">
+						<img src="images/old-fashioned.jpg" alt="Classic Old Fashioned">
+						<div class="menu-item-content">
+							<h3>Classic Old Fashioned</h3>
+							<p>Bourbon, bitters, brown sugar, and orange zest served over ice.</p>
+							<div class="details"><span class="price">$13</span><span class="tag">Cocktail</span></div>
+						</div>
+					</article>
+					<article class="menu-item">
+						<img src="images/lavender-lemonade.jpg" alt="Lavender Lemonade">
+						<div class="menu-item-content">
+							<h3>Lavender Lemonade</h3>
+							<p>Sparkling lemonade infused with lavender and fresh lemon slices.</p>
+							<div class="details"><span class="price">$6</span><span class="tag">Non-Alcoholic</span></div>
+						</div>
+					</article>
+					<article class="menu-item">
+						<img src="images/espresso-martini.jpg" alt="Espresso Martini">
+						<div class="menu-item-content">
+							<h3>Espresso Martini</h3>
+							<p>Vodka, espresso, coffee liqueur, and vanilla syrup shaken to perfection.</p>
+							<div class="details"><span class="price">$14</span><span class="tag">After Dinner</span></div>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<section class="payment-section">
+				<h2>Payment Methods</h2>
+				<div class="payment-methods">
+					<div class="payment-item">
+						<div class="payment-badge visa">Visa</div>
+						<p>Credit/Debit Card</p>
 					</div>
-					<div>
-						<label for="amount">Initial top-up (optional)</label>
-						<input id="amount" name="amount" type="text" placeholder="e.g., 500" />
+					<div class="payment-item">
+						<div class="payment-badge mastercard">Mastercard</div>
+						<p>Credit/Debit Card</p>
+					</div>
+					<div class="payment-item">
+						<div class="payment-badge paypal">PayPal</div>
+						<p>Digital Wallet</p>
+					</div>
+					<div class="payment-item">
+						<div class="payment-badge apple">Apple Pay</div>
+						<p>Mobile Payment</p>
+					</div>
+					<div class="payment-item">
+						<div class="payment-badge google">Google Pay</div>
+						<p>Mobile Payment</p>
+					</div>
+					<div class="payment-item">
+						<div class="payment-badge cash">Cash</div>
+						<p>On Delivery</p>
 					</div>
 				</div>
-
-				<label for="address">Address</label>
-				<textarea id="address" name="address" placeholder="Optional address"></textarea>
-
-				<div class="row">
-					<div>
-						<label for="password">Password</label>
-						<input id="password" name="password" type="password" placeholder="Choose a password" required />
-					</div>
-					<div>
-						<label for="confirm">Confirm password</label>
-						<input id="confirm" name="confirm" type="password" placeholder="Repeat password" required />
-					</div>
-				</div>
-
-				<div style="margin-top:12px;display:flex;align-items:center;gap:8px">
-					<input id="terms" type="checkbox" />
-					<label for="terms" class="muted">I agree to the terms (demo)</label>
-				</div>
-
-				<div class="actions">
-					<span class="note">All fields marked required are for demo only.</span>
-					<button type="submit">Register</button>
-				</div>
-			</form>
+			</section>
 		</main>
-
-		<script>
-			const form = document.getElementById('regForm');
-			const err = document.getElementById('error');
-
-			function showError(msg){
-				err.style.display = msg ? 'block' : 'none';
-				err.textContent = msg || '';
-			}
-
-			function isEmail(v){
-				return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-			}
-
-			form.addEventListener('submit', (e)=>{
-				e.preventDefault();
-				showError('');
-
-				const fullname = form.fullname.value.trim();
-				const email = form.email.value.trim();
-				const mobile = form.mobile.value.replace(/\D/g,'');
-				const password = form.password.value;
-				const confirm = form.confirm.value;
-				const terms = document.getElementById('terms').checked;
-
-				if(!fullname) return showError('Please enter your full name.');
-				if(!email || !isEmail(email)) return showError('Please enter a valid email.');
-				if(!mobile || mobile.length < 9) return showError('Please enter a valid mobile number.');
-				if(password.length < 6) return showError('Password must be at least 6 characters.');
-				if(password !== confirm) return showError('Passwords do not match.');
-				if(!terms) return showError('You must agree to the terms to continue.');
-
-				// Demo success — in a real app we'd POST to a server here
-				showError('');
-				alert('Registration successful (demo) — check console for form data.');
-				console.log('Form data (demo):', {fullname,email,mobile,password});
-				form.reset();
-			});
-		</script>
 	</body>
 </html>
-
